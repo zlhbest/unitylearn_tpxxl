@@ -1,0 +1,4 @@
+sceneSetups:
+- path: Assets/Scenes/MatchSweets.unity
+  isLoaded: 1
+  isActive: 1
