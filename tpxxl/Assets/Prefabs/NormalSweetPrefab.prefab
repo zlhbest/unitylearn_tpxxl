@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1441510067031844549}
   - component: {fileID: 7627866946477186912}
   - component: {fileID: 949691961}
+  - component: {fileID: 1582662157058273719}
   m_Layer: 0
   m_Name: NormalSweetPrefab
   m_TagString: Untagged
@@ -111,7 +112,7 @@ Animator:
   m_GameObject: {fileID: 1676727658615358218}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a10554356fb2f2c44908a2fc9584e4a7, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6a3a815bc8815f94e839fd4458f9f8f5, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -120,6 +121,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1582662157058273719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676727658615358218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db408e74e8af074497022df0b67a0cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clearAnimation: {fileID: 7400000, guid: 7e19ccf57f1213a47a00b6ed8f207e81, type: 2}
 --- !u!1 &5453470546767862781
 GameObject:
   m_ObjectHideFlags: 0

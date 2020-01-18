@@ -37,7 +37,7 @@ public class GameSweet : MonoBehaviour
     public GameManager.SweetsType Type { get; private set; }
     public MoveSweet MoveComponent { get; private set; }
     public ColorSweet ColorComponent { get ;private set ; }
-
+    public ClearSweet ClearComponent { get; private set; }
     [HideInInspector]//在显示面板隐藏掉这个属性
     public GameManager gameManager;
 
@@ -56,10 +56,17 @@ public class GameSweet : MonoBehaviour
     {
         return ColorComponent != null;//如果脚本是空的，那就不能移动，只有移动脚本不为空的时候才能移动
     }
+    public bool CanClear()
+    {
+        return ClearComponent != null;//如果脚本是空的，那就不能清空
+    }
+
+
     private void Awake()
     {
         MoveComponent = GetComponent<MoveSweet>();
         ColorComponent = GetComponent<ColorSweet>();
+        ClearComponent = GetComponent<ClearSweet>();
     }
 
     private void OnMouseEnter()
