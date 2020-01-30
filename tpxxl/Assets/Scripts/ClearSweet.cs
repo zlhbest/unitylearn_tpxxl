@@ -8,6 +8,8 @@ public class ClearSweet : MonoBehaviour
 
     private bool isClearing;
 
+    public AudioClip destoryAudio;
+
     public bool IsClearing { get => isClearing;}
 
     protected GameSweet sweet;
@@ -25,6 +27,7 @@ public class ClearSweet : MonoBehaviour
         {
             animator.Play(clearAnimation.name);
             //玩家得分+1 播放声音
+            AudioSource.PlayClipAtPoint(destoryAudio,transform.position);
             yield return new WaitForSeconds(clearAnimation.length);
             Destroy(gameObject);
         }

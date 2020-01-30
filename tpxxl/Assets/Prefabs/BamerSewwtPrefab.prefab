@@ -89,6 +89,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4053869925241783481}
   - component: {fileID: 2761658845921289656}
+  - component: {fileID: 973105046}
+  - component: {fileID: 7847084533603276880}
   m_Layer: 0
   m_Name: BamerSewwtPrefab
   m_TagString: Untagged
@@ -125,6 +127,39 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
+--- !u!95 &973105046
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676727658615358218}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9c375d6215903a747816bece6490a36c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7847084533603276880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676727658615358218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db408e74e8af074497022df0b67a0cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clearAnimation: {fileID: 7400000, guid: 3d84e73b794a6874ea489d0acd75d4e4, type: 2}
+  destoryAudio: {fileID: 8300000, guid: 935b03b55d70544b98110c7fb96903f3, type: 3}
 --- !u!1 &5453470546767862781
 GameObject:
   m_ObjectHideFlags: 0

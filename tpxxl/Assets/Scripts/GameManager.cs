@@ -1,14 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; set; }
     //填充时间
     public float fillTime;
+    //游戏UI显示的内容
+    public Text timeText;
+    public float gameTime = 60;
+    private bool gameOver;
+    public int playerScore;
+    public Text playerScoreText;
+    private float addScoreTime;
+    private float currentScore;
     public int xColumn;//列数
     public int yRow;//行数
+    public GameObject GameOverPanel;
+    public Text finalScore;
     //甜品的种类
     public enum SweetsType
     {
@@ -48,12 +60,42 @@ public class GameManager : MonoBehaviour
     //所有的东西都是在gamemanager里面生成的，所以需要在gamemanager里面进行管理
     private void Start()
     {
+        GameOverPanel.SetActive(false);
         CreatPrefabDics();//创建甜品预制体字典
         InitBackGround();//创建背景巧克力网格
         Creatsweets();//创建甜品
         Destroy(sweets[4, 4].gameObject);
         CreatNewSweet(4, 4, SweetsType.BARRIER);
         StartCoroutine(AllFill());
+    }
+    private void Update()
+    {
+        if (gameOver) return;
+        gameTime -= Time.deltaTime;
+        if(gameTime<=0)
+        {
+            gameTime = 0;
+            //显示我们失败的面板
+            GameOverPanel.SetActive(true);
+            finalScore.text = playerScore .ToString();
+            //播放失败动画
+            gameOver = true;
+            return;
+        }
+        timeText.text = gameTime.ToString("0");
+        if(addScoreTime<=0.05f)
+        {
+            addScoreTime += Time.deltaTime;
+        }
+        else
+        {
+            if (currentScore < playerScore)
+            {
+                currentScore++;
+                playerScoreText.text = currentScore.ToString();
+                addScoreTime = 0;
+            }
+        }
     }
     private void Creatsweets()
     {
@@ -102,7 +144,6 @@ public class GameManager : MonoBehaviour
         //实际需要实例化巧克力块的x位置=GameManager位置的x坐标-大网格长度的一半+行列对应的坐标
         return new Vector3(transform.position.x - xColumn / 2f + x, transform.position.y + yRow / 2f - y);
     }
-
     //产生甜品的方法
     public GameSweet CreatNewSweet(int x, int y, SweetsType type)
     {
@@ -217,7 +258,6 @@ public class GameManager : MonoBehaviour
         }
         return filledNotFinished;
     }
-
     /// <summary>
     ///甜品是否相邻
     /// </summary>
@@ -254,16 +294,19 @@ public class GameManager : MonoBehaviour
     }
     public void PressSweet(GameSweet sweet)
     {
+        if (gameOver) return;
         pressedSweet = sweet;
     }
 
     public void EnterSweet(GameSweet sweet)
     {
+        if (gameOver) return;
         enteredSweet = sweet;
     }
     public void ReleaseSweet()
     {
-        if(IsFriend(pressedSweet, enteredSweet))
+        if (gameOver) return;
+        if (IsFriend(pressedSweet, enteredSweet))
         {
             Exchange(pressedSweet, enteredSweet);
         }
@@ -355,7 +398,7 @@ public class GameManager : MonoBehaviour
                     {
                         for (int j = 0; j < matchLineSweets.Count; j++)
                         {
-                            finishedMatchingSweets.Add(matchLineSweets[i]);
+                            finishedMatchingSweets.Add(matchLineSweets[j]);
                         }
                         break;
                     }
@@ -446,7 +489,7 @@ public class GameManager : MonoBehaviour
                     {
                         for (int j = 0; j < matchRowSweets.Count; j++)
                         {
-                            finishedMatchingSweets.Add(matchRowSweets[i]);
+                            finishedMatchingSweets.Add(matchRowSweets[j]);
                         }
                         break;
                     }
@@ -460,11 +503,12 @@ public class GameManager : MonoBehaviour
 
         return null;
     }
-    //清楚方法
+    //清除方法
     public bool ClearSweet(int x,int y)
     {
         if(sweets[x,y].CanClear() &&!sweets[x,y].ClearComponent.IsClearing)
         {
+            playerScore++;
             sweets[x, y].ClearComponent.Clear();
             CreatNewSweet(x, y, SweetsType.EMPTY);
             return true;
@@ -473,6 +517,14 @@ public class GameManager : MonoBehaviour
         {
             return false;
         }
+    }
+    //清除饼干的方法
+    private void  ClearBarrier(int x,int y)//被消除掉的甜品的坐标
+    {
+        //for (int i = 0; i < length; i++)
+        //{
+
+        //}
     }
     //清楚全部完成匹配的甜品
     private bool ClearAllMatchedSweet()
@@ -499,5 +551,14 @@ public class GameManager : MonoBehaviour
             }
         }
         return needRefill;
+    }
+
+    public void ReturnToMian()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void Replay()
+    {
+        SceneManager.LoadScene(1);
     }
 }

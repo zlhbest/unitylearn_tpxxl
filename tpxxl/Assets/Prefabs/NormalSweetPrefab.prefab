@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clearAnimation: {fileID: 7400000, guid: 7e19ccf57f1213a47a00b6ed8f207e81, type: 2}
+  destoryAudio: {fileID: 8300000, guid: 9cb19eb032d304b07acec596ae2ce4a4, type: 3}
 --- !u!1 &5453470546767862781
 GameObject:
   m_ObjectHideFlags: 0
